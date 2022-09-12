@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-@buuf=su^=7@^c4%gm@2u-4qw%xn$&svby^9=jlh%dw_+xr_6f
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# AUTH_USER_MODEL = "account.User" 
 
 
 # Application definition
@@ -39,9 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Add our new application
     'catalog.apps.CatalogConfig', #This object was created for us in /catalog/apps.py
+    'account.apps.AccountConfig',
+
+    'corsheaders', 
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,6 +55,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+)
+
+APPEND_SLASH=False
 
 ROOT_URLCONF = 'locallibrary.urls'
 
